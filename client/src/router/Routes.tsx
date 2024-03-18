@@ -11,12 +11,14 @@ import BasketPage from "../components/basket/BasketPage";
 import CheckoutPage from "../components/checkout/CheckoutPage";
 import Login from "../components/account/Login";
 import Register from "../components/account/Register";
+import RequireAuth from "./RequireAuth";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      { element: <RequireAuth />, children: [] },
       { path: "", element: <HomePage /> },
       { path: "catalog", element: <Catalog /> },
       { path: "catalog/:id", element: <ProductDetails /> },
