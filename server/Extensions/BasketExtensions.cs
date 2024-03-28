@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using server.DTOs;
 using server.Entities;
 
@@ -7,7 +8,7 @@ namespace server.Extensions
     {
         public static BasketDto MapBasketToDto(this Basket basket)
         {
-             return new BasketDto
+            return new BasketDto
             {
                 Id = basket.Id,
                 BuyerId = basket.BuyerId,
@@ -23,6 +24,11 @@ namespace server.Extensions
 
                 }).ToList()
             };
+        }
+
+        public static IQueryable<Basket> RetrieveBasketWithItems(this IQueryable<Basket> query, string BuyerId)
+        {
+            return query.Include(i => i.Items).ThenInclude(p => p.Product).Where(b => b.BuyerId == BuyerId);
         }
     }
 }

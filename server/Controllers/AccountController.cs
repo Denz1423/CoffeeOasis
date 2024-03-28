@@ -19,8 +19,8 @@ namespace server.Controllers
         public AccountController(UserManager<User> userManager, TokenService tokenService, StoreContext context)
         {
             _context = context;
-            _userManager = userManager;
             _tokenService = tokenService;
+            _userManager = userManager;
         }
 
         [HttpPost("login")]
@@ -50,7 +50,7 @@ namespace server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult> Register(RegisterDto registerDto)
+        public async Task<ActionResult> RegisterUser(RegisterDto registerDto)
         {
             var user = new User { UserName = registerDto.Username, Email = registerDto.Email };
 
@@ -62,6 +62,7 @@ namespace server.Controllers
                 {
                     ModelState.AddModelError(error.Code, error.Description);
                 }
+
                 return ValidationProblem();
             }
 
@@ -75,6 +76,7 @@ namespace server.Controllers
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
             var userBasket = await RetrieveBasket(User.Identity.Name);
 
             return new UserDto
@@ -92,7 +94,11 @@ namespace server.Controllers
                 Response.Cookies.Delete("buyerId");
                 return null;
             }
-            return await _context.Baskets.Include(i => i.Items).ThenInclude(p => p.Product).FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+
+            return await _context.Baskets
+                .Include(i => i.Items)
+                .ThenInclude(p => p.Product)
+                .FirstOrDefaultAsync(basket => basket.BuyerId == buyerId);
         }
     }
 }

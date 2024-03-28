@@ -26,7 +26,7 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity)
+        public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity = 1)
         {
             var basket = await RetrieveBasket(GetBuyerId());
             if (basket == null) basket = CreateBasket();
@@ -62,7 +62,7 @@ namespace server.Controllers
                 Response.Cookies.Delete("buyerId");
                 return null;
             }
-            return await _context.Baskets.Include(i => i.Items).ThenInclude(p => p.Product).FirstOrDefaultAsync(x => x.BuyerId == Request.Cookies["buyerId"]);
+            return await _context.Baskets.Include(i => i.Items).ThenInclude(p => p.Product).FirstOrDefaultAsync(basket => basket.BuyerId == buyerId);
         }
 
         private string GetBuyerId()

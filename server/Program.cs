@@ -53,7 +53,7 @@ builder.Services.AddIdentityCore<User>(opt =>
     opt.Password.RequireUppercase = false;
     opt.Password.RequiredLength = 4;
 })
-    .AddRoles<IdentityRole>()
+    .AddRoles<Role>()
     .AddEntityFrameworkStores<StoreContext>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt => {
