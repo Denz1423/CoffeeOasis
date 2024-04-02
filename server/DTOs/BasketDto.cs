@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-
 namespace server.DTOs
 {
     public class BasketDto
@@ -13,5 +7,9 @@ namespace server.DTOs
         public string BuyerId { get; set; }
 
         public List<BasketItemDto> Items { get; set; }
+
+        public string PaymentIntentId { get; set; }
+
+        public string ClientSecret { get; set; }
     }
 }
