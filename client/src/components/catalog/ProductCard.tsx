@@ -41,10 +41,10 @@ export default function ProductCard({ product }: Props) {
         title={product.name}
       />
       <CardContent>
-        <Typography gutterBottom color="secondary" variant="h5">
+        <Typography gutterBottom color="secondary.main" variant="h5">
           ${product.price.toFixed(2)}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="secondary.main">
           {product.brand} / {product.type}
         </Typography>
       </CardContent>

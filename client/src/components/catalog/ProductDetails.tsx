@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import {
   Divider,
   Grid,
@@ -86,7 +87,7 @@ export default function ProductDetails() {
           <Table>
             <TableBody>
               <TableRow>
-                <TableCell>Name</TableCell>
+                <TableCell >Name</TableCell>
                 <TableCell>{product?.name}</TableCell>
               </TableRow>
               <TableRow>
@@ -108,7 +109,7 @@ export default function ProductDetails() {
             </TableBody>
           </Table>
         </TableContainer>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{ mt: 2 }}>
           <Grid item xs={6}>
             <TextField
               onChange={handleInputChange}

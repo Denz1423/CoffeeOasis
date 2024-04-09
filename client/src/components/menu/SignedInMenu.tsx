@@ -32,8 +32,6 @@ export default function SignedInMenu() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My orders</MenuItem>
         <MenuItem
           onClick={() => {
             dispatch(signOut()), dispatch(clearBasket());
